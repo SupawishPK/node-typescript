@@ -5,7 +5,9 @@ import User from '../models/user.model'
 
 export async function createUser(input: DocumentDefinition<UserDocument>) {
   try {
-    return await User.create(input)
+    //Create User
+    const create = await User.create(input)
+    return create
   } catch (error) {
     throw new Error(error)
   }

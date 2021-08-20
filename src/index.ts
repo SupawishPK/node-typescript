@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express'
 import config from 'config'
 import log from './config/logger'
 import connect from './config/DatabaseConfig'
-import routes from "./routes";
+import userRoutes from './api/v1/routes/user.route'
 
 const port = config.get('port') as number
 const host = config.get('host') as string
@@ -17,10 +17,10 @@ app.get('./', (req: Request, res: Response): void => {
   res.json({ message: 'Please Like this' })
 })
 
-//middleware
-
 app.listen(port, host, (): void => {
   log.info(`Server listing at http://${host}:${port}`)
   connect()
-  routes(app);
+
+  //routes
+  userRoutes(app)
 })
