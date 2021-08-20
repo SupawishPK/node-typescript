@@ -9,3 +9,4 @@ app.get("./", (req: Request, res: Response): void => {
 app.listen("3001", (): void => {
   console.log("Server Running!");
 });
+
