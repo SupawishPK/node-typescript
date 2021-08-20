@@ -1,7 +1,9 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 import config from 'config'
-import { UserDocument } from '../interfaces/user.interface'
+import { UserDocument as IUserDocument } from '../interfaces/user.interface'
+
+export interface UserDocument extends IUserDocument {}
 
 const UserSchema = new mongoose.Schema(
   {

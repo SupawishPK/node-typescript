@@ -1,6 +1,49 @@
-import { Express } from 'express'
-import userRoute from './api/v1/routes/user.route'
+import { Express, Request, Response } from 'express'
+import { createUserSessionHandler } from './api/v1/controllers/session.controller'
+import { createUserHandler } from './api/v1/controllers/user.controller'
+import validateRequest from './api/v1/middlewares/validateRequest'
+import { createUserSchema, createUserSessionSchema } from './schema/user.schema'
 
 export default function (app: Express) {
-  app.use('/api/users', userRoute)
+  app.get('/healthcheck', (req: Request, res: Response) => res.sendStatus(200))
+
+  // Register user
+  app.post('/api/users', validateRequest(createUserSchema), createUserHandler)
+
+  // Login
+  app.post(
+    '/api/sessions',
+    validateRequest(createUserSessionSchema),
+    createUserSessionHandler
+  )
+
+  /* // Get the user's sessions
+  app.get("/api/sessions", requiresUser, getUserSessionsHandler);
+
+  // Logout
+  app.delete("/api/sessions", requiresUser, invalidateUserSessionHandler); */
+
+  /* // Create a post
+  app.post(
+    "/api/posts",
+    [requiresUser, validateRequest(createPostSchema)],
+    createPostHandler
+  );
+
+  // Update a post
+  app.put(
+    "/api/posts/:postId",
+    [requiresUser, validateRequest(updatePostSchema)],
+    updatePostHandler
+  );
+
+  // Get a post
+  app.get("/api/posts/:postId", getPostHandler);
+
+  // Delete a post
+  app.delete(
+    "/api/posts/:postId",
+    [requiresUser, validateRequest(deletePostSchema)],
+    deletePostHandler
+  ); */
 }

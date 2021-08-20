@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
-import { SessionDocument } from '../interfaces/session.interface'
+import { SessionDocument as ISessionDocument } from '../interfaces/session.interface'
+
+export interface SessionDocument extends ISessionDocument {}
 
 const SessionSchema = new mongoose.Schema(
   {
@@ -13,4 +15,6 @@ const SessionSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-const User = mongoose.model<SessionDocument>('Session', SessionSchema)
+const Session = mongoose.model<SessionDocument>('Session', SessionSchema)
+
+export default Session

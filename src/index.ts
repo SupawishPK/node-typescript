@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express'
 import config from 'config'
 import log from './config/logger'
 import connect from './config/DatabaseConfig'
-import routes from './routes'
+import routes from "./routes";
 
 const port = config.get('port') as number
 const host = config.get('host') as string
@@ -18,10 +18,9 @@ app.get('./', (req: Request, res: Response): void => {
 })
 
 //middleware
-app.use('/api/users', routes)
 
 app.listen(port, host, (): void => {
   log.info(`Server listing at http://${host}:${port}`)
   connect()
-  routes(app)
+  routes(app);
 })
