@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
-import config from "config";
-import log from "../config/logger";
+import mongoose from 'mongoose'
+import config from 'config'
+import log from '../config/logger'
 
 function connect() {
-  const dbUrl = config.get("dbUrl") as string;
+  const dbUrl = config.get('dbUrl') as string
 
   return mongoose
     .connect(dbUrl, {
@@ -13,12 +13,12 @@ function connect() {
       useFindAndModify: false,
     })
     .then(() => {
-      log.info("Database connected");
+      log.info('Database connected')
     })
     .catch((error) => {
-      log.error("db error", error);
-      process.exit(1);
-    });
+      log.error('db error', error)
+      process.exit(1)
+    })
 }
 
-export default connect;
+export default connect

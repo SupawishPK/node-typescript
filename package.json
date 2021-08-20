@@ -37,6 +37,7 @@
     "@types/mongoose": "^5.11.97",
     "@types/nanoid": "^3.0.0",
     "@types/pino": "^6.3.11",
-    "@types/yup": "^0.29.13"
+    "@types/yup": "^0.29.13",
+    "prettier": "^2.3.2"
   }
 }

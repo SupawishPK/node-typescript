@@ -1,6 +1,6 @@
-import { AnySchema } from "yup";
-import { Request, Response, NextFunction } from "express";
-import log from "../../../config/logger";
+import { AnySchema } from 'yup'
+import { Request, Response, NextFunction } from 'express'
+import log from '../../../config/logger'
 
 const validate =
   (schema: AnySchema) =>
@@ -10,13 +10,13 @@ const validate =
         body: req.body,
         query: req.query,
         params: req.params,
-      });
+      })
 
-      return next();
+      return next()
     } catch (e) {
-      log.error(e);
-      return res.status(400).send(e.errors);
+      log.error(e)
+      return res.status(400).send(e.errors)
     }
-  };
+  }
 
-export default validate;
+export default validate
