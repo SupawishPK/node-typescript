@@ -12,12 +12,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUser = void 0;
+exports.validatePassword = exports.findUser = exports.createUser = void 0;
+const lodash_1 = require("lodash");
 const user_model_1 = __importDefault(require("../models/user.model"));
 function createUser(input) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            return yield user_model_1.default.create(input);
+            //Create User
+            const create = yield user_model_1.default.create(input);
+            return create;
         }
         catch (error) {
             throw new Error(error);
@@ -25,4 +28,23 @@ function createUser(input) {
     });
 }
 exports.createUser = createUser;
-function findUser() { }
+function findUser(query) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return user_model_1.default.findOne(query).lean();
+    });
+}
+exports.findUser = findUser;
+function validatePassword({ email, password, }) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const user = yield user_model_1.default.findOne({ email });
+        if (!user) {
+            return false;
+        }
+        const isValid = yield user.comparePassword(password);
+        if (!isValid) {
+            return false;
+        }
+        return lodash_1.omit(user.toJSON(), 'password');
+    });
+}
+exports.validatePassword = validatePassword;

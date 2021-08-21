@@ -8,23 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const logger_1 = __importDefault(require("../../../config/logger"));
-const validate = (schema) => (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const test = yield schema.validate({
-            body: req.body,
-            query: req.query,
-            params: req.params,
-        });
-        return next();
+const lodash_1 = require("lodash");
+const requiresUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = lodash_1.get(req, 'user');
+    if (!user) {
+        return res.sendStatus(403);
     }
-    catch (e) {
-        logger_1.default.error(e);
-        return res.status(400).send(e.errors);
-    }
+    return next();
 });
-exports.default = validate;
+exports.default = requiresUser;

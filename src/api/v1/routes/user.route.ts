@@ -17,11 +17,7 @@ export default function (app: Express) {
   app.post('/api/users', validateRequest(createUserSchema), createUserHandler)
 
   // Login
-  app.post(
-    '/api/sessions',
-    validateRequest(createUserSessionSchema),
-    createUserSessionHandler
-  )
+  app.post('/api/sessions',validateRequest(createUserSessionSchema),createUserSessionHandler)
 
   // // Get the user's sessions
   // app.get("/api/sessions", requiresUser, getUserSessionsHandler);

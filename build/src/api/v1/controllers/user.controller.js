@@ -20,6 +20,7 @@ function createUserHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const user = yield user_service_1.createUser(req.body);
+            console.log(user);
             return res.send(lodash_1.omit(user.toJSON(), 'password'));
         }
         catch (e) {

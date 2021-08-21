@@ -30,9 +30,13 @@ const UserSchema = new mongoose_1.default.Schema({
         required: true,
     },
 }, { timestamps: true });
+// UserSchema.post('save', function() {
+//   console.log('this gets printed fourth');
+// });
 UserSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         let user = this;
+        console.log('this gets printed third');
         //only hash the password if it has been modified (or is new)
         if (!user.isModified('password'))
             return next();
