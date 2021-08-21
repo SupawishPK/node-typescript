@@ -24,19 +24,13 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-UserSchema.pre('validate', function() {
-  console.log('this gets printed first');
-});
-UserSchema.post('validate', function() {
-  console.log('this gets printed second');
-});
-UserSchema.post('save', function() {
-  console.log('this gets printed fourth');
-});
+// UserSchema.post('save', function() {
+//   console.log('this gets printed fourth');
+// });
 
 UserSchema.pre('save', async function (next: mongoose.HookNextFunction) {
   let user = this as UserDocument
-  console.log('this gets printed third');
+  console.log('this gets printed third')
   //only hash the password if it has been modified (or is new)
   if (!user.isModified('password')) return next()
 
