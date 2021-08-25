@@ -41,10 +41,10 @@ export async function reIssueAccessToken({
   // ถ้า decoded ไม่ได้ return false
   if (!decoded || !get(decoded, '_id')) return false
 
-  // Get the session 
+  // Get the session
   const session = await Session.findById(get(decoded, '_id'))
 
-  //Make sure the session is still valid 
+  //Make sure the session is still valid
   //ถ้า session ยังคงใช้ได้อยู่ return false
   if (!session || !session?.valid) return false
 
@@ -64,4 +64,8 @@ export async function updateSession(
   update: UpdateQuery<SessionDocument>
 ) {
   return Session.updateOne(query, update)
+}
+
+export async function findSessions(query: FilterQuery<SessionDocument>) {
+  return Session.find(query).lean()
 }

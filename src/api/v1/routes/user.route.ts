@@ -6,6 +6,7 @@ import {
 import {
   createUserSessionHandler,
   invalidateUserSessionHandler,
+  getUserSessionsHandler
 } from '../controllers/session.controller'
 import { createUserHandler } from '../controllers/user.controller'
 import { validateRequest, requiresUser } from '../middlewares'
@@ -20,7 +21,7 @@ export default function (app: Express) {
   app.post('/api/sessions',validateRequest(createUserSessionSchema),createUserSessionHandler)
 
   // // Get the user's sessions
-  // app.get("/api/sessions", requiresUser, getUserSessionsHandler);
+  app.get("/api/sessions", requiresUser, getUserSessionsHandler);
 
   // Logout
   app.delete('/api/sessions', requiresUser, invalidateUserSessionHandler)
